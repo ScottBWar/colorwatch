@@ -23,11 +23,11 @@ myApp.controller('MyController', function MyController($scope, $http) {
         'value': 14
     }];
 
-    $scope.makeCircle =	function(){var bodySelection = d3.select("body");
+    $scope.makeCircle =	function(stat){var bodySelection = d3.select("body");
  
  var svgSelection = bodySelection.append("svg")
-       .attr("width", 50)
-       .attr("height", 50);
+       .attr("width", stat.value)
+       .attr("height", stat.value);
  
  var circleSelection = svgSelection.append("circle")
       .attr("cx", 25)
