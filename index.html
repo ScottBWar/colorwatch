@@ -15,9 +15,16 @@
 
 		<p>hello</p>
 		<h2>Welcome {{name}} !</h2>
+		<div wark></div>
+
+		<div simple-chart chart-data="stats"></div>
+
+
 		<h3>^ Did u see that data binding tho??</h3>
 
 		<div id="blank" style="float:right;border:4px solid black;height:800px;width:800px;">
+
+			<div simple-chart chart-data="stats"></div>
 
 
 
@@ -28,12 +35,14 @@
 		<ul ng-repeat="stat in stats">
 		<li ng-click="makeCircle(stat)">{{stat.label}}</li>
 		<li>{{stat.value}}</li>
-		<script>
-
-   </script>
-
+		<li>{{stat.color}}</li>
+		<button ng-click="increaseStat(stat)">increase</button>
+	
 
 		</ul>
+
+
+		<button ng-click="makeSpectrum()">Make Some Stuff</button>
 
 		</div>
 
