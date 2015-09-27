@@ -51,6 +51,11 @@ myApp.controller('MyController', function MyController($scope, $http) {
     };
 
 
+    $scope.decreaseStat = function(stat) {
+        stat.value -= 1;
+    };
+
+
 
     $scope.makeSpectrum = function() {
 
@@ -79,11 +84,13 @@ myApp.directive('simpleChart', function($window) {
         // template: "<svg width='850' height='200'></svg>",
         link: function(scope, elem, attrs) {
 
-            scope.$watch('stat',function(){
+            scope.$watch('stat', function() {
+               
                 drawSimpleChart();
 
-    
-            },true);
+            }, true);
+
+
             var statToDraw = scope[attrs.chartData];
 
             // scope.$watch('dataToPlot', function(newVals, oldVals) {
@@ -93,18 +100,21 @@ myApp.directive('simpleChart', function($window) {
             function drawSimpleChart() {
                 var bodySelection = d3.select(elem[0]);
 
-
-                    var svgSelection = bodySelection.append("svg")
-                        .attr("width", 100)
-                        .attr("height", 100);
+                bodySelection.selectAll('*').remove();
 
 
 
-                    var circleSelection = svgSelection.append("circle")
-                        .attr("cx", 50)
-                        .attr("cy", 50)
-                        .attr("r", statToDraw.value * 2)
-                        .style("fill", statToDraw.color);
+                var svgSelection = bodySelection.append("svg")
+                    .attr("width", 100)
+                    .attr("height", 100);
+
+
+
+                var circleSelection = svgSelection.append("circle")
+                    .attr("cx", 50)
+                    .attr("cy", 50)
+                    .attr("r", statToDraw.value * 2)
+                    .style("fill", statToDraw.color);
 
             }
 
