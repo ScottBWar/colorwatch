@@ -79,7 +79,11 @@ myApp.directive('simpleChart', function($window) {
         // template: "<svg width='850' height='200'></svg>",
         link: function(scope, elem, attrs) {
 
+            scope.$watch('stat',function(){
+                drawSimpleChart();
 
+    
+            },true);
             var statToDraw = scope[attrs.chartData];
 
             // scope.$watch('dataToPlot', function(newVals, oldVals) {
@@ -104,7 +108,7 @@ myApp.directive('simpleChart', function($window) {
 
             }
 
-            drawSimpleChart();
+            // drawSimpleChart();
         }
 
 
