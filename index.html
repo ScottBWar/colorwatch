@@ -17,7 +17,10 @@
 		<h2>Welcome {{name}} !</h2>
 		<div wark></div>
 
-		<div simple-chart chart-data="stats"></div>
+		<div style="display:inline;float:left;" ng-repeat="stat in stats">
+		<h6>{{stat.label}}</h6>
+		<div simple-chart chart-data="stat"></div>
+		</div>
 
 
 		<h3>^ Did u see that data binding tho??</h3>
