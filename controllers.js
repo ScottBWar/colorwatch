@@ -7,27 +7,27 @@ myApp.controller('MyController', function MyController($scope, $http) {
 
     $scope.stats = [{
         'label': 'str',
-        'value': 20,
+        'value': 12,
         'color': 'red'
     }, {
         'label': 'dex',
-        'value': 18,
+        'value': 10,
         'color': 'orange'
     }, {
         'label': 'con',
-        'value': 14,
+        'value': 8,
         'color': 'purple'
     }, {
         'label': 'int',
-        'value': 12,
+        'value': 6,
         'color': 'blue'
     }, {
         'label': 'wis',
-        'value': 8,
+        'value': 4,
         'color': 'green'
     }, {
         'label': 'cha',
-        'value': 4,
+        'value': 2,
         'color': 'pink'
     }];
 
@@ -106,7 +106,7 @@ myApp.directive('simpleChart', function($window) {
 
                 var svgSelection = bodySelection.append("svg")
                     .attr("width", 100)
-                    .attr("height", 100);
+                    .attr("height", 200);
 
 
 
