@@ -88,7 +88,7 @@ myApp.directive('simpleChart', function($window) {
 
             function drawSimpleChart() {
                 var bodySelection = d3.select(elem[0]);
-                 // console.log(bodySelection)
+                // console.log(bodySelection)
 
                 bodySelection.select('*').remove();
 
@@ -119,20 +119,18 @@ myApp.directive('pieChart', function($window) {
                 drawPieChart();
             }, true);
 
-            var statsToDraw = scope[attrs.chartData];
-
 
             function drawPieChart() {
+
                 var bodySelection = d3.select(elem[0]);
 
                 bodySelection.selectAll('*').remove();
 
                 var dataset = scope[attrs.chartData];
 
-                var width = 360;
-                var height = 360;
+                var width = 180;
+                var height = 180;
                 var radius = Math.min(width, height) / 2;
-                var color = d3.scale.category20b();
 
                 var svg = bodySelection
                     .append('svg')
@@ -155,13 +153,66 @@ myApp.directive('pieChart', function($window) {
                     .enter()
                     .append('path')
                     .attr('d', arc)
-                    .attr('fill', function(d, i) {
+                    .attr('fill', function(d) {
                         return d.data.color;
                     });
 
+            }
+        }
+    };
+});
+
+myApp.directive('donutChart', function($window) {
+    return {
+        restrict: 'EA',
+        // replace:true,
+        link: function(scope, elem, attrs) {
+
+            scope.$watch('stats', function() {
+                drawDonutChart();
+            }, true);
 
 
+            function drawDonutChart() {
+                console.log("mmm.. donuts")
+                var bodySelection = d3.select(elem[0]);
 
+                bodySelection.selectAll('*').remove();
+
+                var dataset = scope[attrs.chartData];
+
+                var width = 180;
+                var height = 180;
+                var radius = Math.min(width, height) / 2;
+                var centerWidth = 30;
+
+                var svg = bodySelection
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .append('g')
+                    .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+
+                var arc = d3.svg.arc()
+                    .innerRadius(radius - centerWidth)
+                    .outerRadius(radius);
+
+                var pie = d3.layout.pie()
+                    .value(function(d) {
+                        return d.value;
+                    })
+                    .sort(null);
+
+                var path = svg.selectAll('path')
+                    .data(pie(dataset))
+                    .enter()
+                    .append('path')
+                    .attr('d', arc)
+                    .attr('fill', function(d) {
+                        return d.data.color;
+                    });
+
+               
             }
         }
     };

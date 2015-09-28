@@ -18,29 +18,14 @@
 		<h2>Welcome {{name}} !</h2>
 	<!-- 	<div wark></div> -->
 		<div class="contain">
-		<div style="display:inline;float:left;" ng-repeat="stat in stats">
+		<div style="display:inline;float:right;" ng-repeat="stat in stats">
 		<div simple-chart chart-data="stat"></div>
 		</div>
 		</div>
 
 		<div style="clear:both;"></div>
 
-
-
-
-		<div id="blank" style="float:right;border:4px solid black;height:600px;width:600px;">
-
-		<div pie-chart chart-data="stats">
-			
-
-		</div>
-
-
-
-		</div>
-		
-
-		<div class="list">
+				<div class="list" style="float:left;margin-right:300px;margin-top:-100px;">
 		<ul ng-repeat="stat in stats">
 		<li>Color:<input class="color" ng-model="stat.color" placeholder="stat.color"></li>
 		<li>Value:<input type="text" min="1" max="20" ng-model="stat.value"></li>
@@ -52,17 +37,40 @@
 		</ul>
 
 
-		<button ng-click="makeSpectrum()">Make Some Stuff</button>
+<!-- 		<button ng-click="makeSpectrum()">Make Some Stuff</button> -->
 
 		</div>
 
-		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+
+		<div id="blank" style="float:left;">
+
+
+		<div pie-chart chart-data="stats">
+
+			
+
 		</div>
+
+
+		<div id="blank" style="float:left;">
+
+
+
+		<div donut-chart chart-data="stats">
+			
+
+		</div>
+
+<div style="clear:both;"></div>
+
+
+		</div>
+		
+
+
+
 	
 
 	</body>
