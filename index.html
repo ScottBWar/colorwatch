@@ -12,11 +12,8 @@
 		
 	</head>
 	<body ng-controller="MyController">
-		<input type="text" ng-model="name">
+		<!-- <input type="text" ng-model="name"> -->
 
-		<p>hello</p>
-		<h2>Welcome {{name}} !</h2>
-	<!-- 	<div wark></div> -->
 		<div class="contain">
 		<div style="display:inline;float:right;" ng-repeat="stat in stats">
 		<div simple-chart chart-data="stat"></div>
