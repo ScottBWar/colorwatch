@@ -50,11 +50,9 @@ myApp.controller('MyController', function MyController($scope, $http) {
         stat.value += 1;
     };
 
-
     $scope.decreaseStat = function(stat) {
         stat.value -= 1;
     };
-
 
 
     $scope.makeSpectrum = function() {
@@ -67,47 +65,37 @@ myApp.controller('MyController', function MyController($scope, $http) {
 
 });
 
-myApp.directive('wark', function() {
-    return {
-        restrict: 'A',
-        // scope:false,
-        template: '<div class="wark">WARK! WARK! {{stats[0].label}} </div>'
-    };
-});
+// myApp.directive('wark', function() {
+//     return {
+//         restrict: 'A',
+//         // scope:false,
+//         template: '<div class="wark">This is an example of a directive {{stats[0].value}} </div>'
+//     };
+// });
 
 myApp.directive('simpleChart', function($window) {
     return {
         restrict: 'EA',
-        // scope: {
-        //     data: '=' // bi-directional data-binding
-        // },
-        // template: "<svg width='850' height='200'></svg>",
+
         link: function(scope, elem, attrs) {
 
             scope.$watch('stat', function() {
-               
                 drawSimpleChart();
-
             }, true);
-
 
             var statToDraw = scope[attrs.chartData];
 
-            // scope.$watch('dataToPlot', function(newVals, oldVals) {
-            //     return drawSimpleChart(newVals);
-            // }, true);
 
             function drawSimpleChart() {
                 var bodySelection = d3.select(elem[0]);
+                 // console.log(bodySelection)
 
-                bodySelection.selectAll('*').remove();
-
+                bodySelection.select('*').remove();
 
 
                 var svgSelection = bodySelection.append("svg")
                     .attr("width", 100)
                     .attr("height", 200);
-
 
 
                 var circleSelection = svgSelection.append("circle")
@@ -117,18 +105,65 @@ myApp.directive('simpleChart', function($window) {
                     .style("fill", statToDraw.color);
 
             }
-
-            // drawSimpleChart();
         }
-
-
     };
 });
 
-// myApp.directive('circles', function() {
-//   return {
-//     restrict: 'A',
-//     // scope:false,
-//     template: '<script>makeSpectrum();</script>'
-//   };
-// });
+myApp.directive('pieChart', function($window) {
+    return {
+        restrict: 'EA',
+        // replace:true,
+        link: function(scope, elem, attrs) {
+
+            scope.$watch('stats', function() {
+                drawPieChart();
+            }, true);
+
+            var statsToDraw = scope[attrs.chartData];
+
+
+            function drawPieChart() {
+                var bodySelection = d3.select(elem[0]);
+                console.log(bodySelection)
+
+                bodySelection.selectAll('*').remove();
+
+                var dataset = scope[attrs.chartData];
+
+                var width = 360;
+                var height = 360;
+                var radius = Math.min(width, height) / 2;
+                var color = d3.scale.category20b();
+
+                var svg = bodySelection
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .append('g')
+                    .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+
+                var arc = d3.svg.arc()
+                    .outerRadius(radius);
+
+                var pie = d3.layout.pie()
+                    .value(function(d) {
+                        return d.value;
+                    })
+                    .sort(null);
+
+                var path = svg.selectAll('path')
+                    .data(pie(dataset))
+                    .enter()
+                    .append('path')
+                    .attr('d', arc)
+                    .attr('fill', function(d, i) {
+                        return color(d.data.label);
+                    });
+
+
+
+
+            }
+        }
+    };
+});
