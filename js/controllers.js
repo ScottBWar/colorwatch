@@ -242,7 +242,6 @@ myApp.directive('barsChart', function($window) {
 
 
             function drawBarsChart() {
-                console.log("mmm.. bars");
                 var bodySelection = d3.select(elem[0]);
 
                 bodySelection.selectAll('*').remove();
