@@ -157,7 +157,7 @@ myApp.directive('pieChart', function($window) {
                     .append('path')
                     .attr('d', arc)
                     .attr('fill', function(d, i) {
-                        return color(d.data.label);
+                        return d.data.color;
                     });
 
 
