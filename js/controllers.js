@@ -181,6 +181,18 @@ myApp.directive('donutChart', function($window) {
 
                 var dataset = scope[attrs.chartData];
 
+                //reverse dataset on second graph just looks a little better...
+                function reverseDataset() { 
+                    var retData = new Array;
+                    for (var i = dataset.length - 1; i >= 0; i--) {
+                        retData.push(dataset[i]);
+                    }
+                    return retData;
+                }
+                //s
+
+                var retData = reverseDataset();
+
                 var width = 180;
                 var height = 180;
                 var radius = Math.min(width, height) / 2;
@@ -204,7 +216,7 @@ myApp.directive('donutChart', function($window) {
                     .sort(null);
 
                 var path = svg.selectAll('path')
-                    .data(pie(dataset))
+                    .data(pie(retData))
                     .enter()
                     .append('path')
                     .attr('d', arc)
@@ -212,7 +224,7 @@ myApp.directive('donutChart', function($window) {
                         return d.data.color;
                     });
 
-               
+
             }
         }
     };
