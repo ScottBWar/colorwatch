@@ -189,7 +189,7 @@ myApp.directive('donutChart', function($window) {
                     }
                     return retData;
                 }
-                //s
+                //
 
                 var retData = reverseDataset();
 
