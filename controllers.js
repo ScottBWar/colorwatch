@@ -124,7 +124,6 @@ myApp.directive('pieChart', function($window) {
 
             function drawPieChart() {
                 var bodySelection = d3.select(elem[0]);
-                console.log(bodySelection)
 
                 bodySelection.selectAll('*').remove();
 
