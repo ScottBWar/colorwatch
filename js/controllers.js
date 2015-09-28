@@ -182,7 +182,7 @@ myApp.directive('donutChart', function($window) {
                 var dataset = scope[attrs.chartData];
 
                 //reverse dataset on second graph just looks a little better...
-                function reverseDataset() { 
+                function reverseDataset() {
                     var retData = new Array;
                     for (var i = dataset.length - 1; i >= 0; i--) {
                         retData.push(dataset[i]);
@@ -223,6 +223,35 @@ myApp.directive('donutChart', function($window) {
                     .attr('fill', function(d) {
                         return d.data.color;
                     });
+
+
+            }
+        }
+    };
+});
+
+myApp.directive('barsChart', function($window) {
+    return {
+        restrict: 'EA',
+        // replace:true,
+        link: function(scope, elem, attrs) {
+
+            scope.$watch('stats', function() {
+                drawBarsChart();
+            }, true);
+
+
+            function drawBarsChart() {
+                console.log("mmm.. bars");
+                var bodySelection = d3.select(elem[0]);
+
+                bodySelection.selectAll('*').remove();
+
+                var dataset = scope[attrs.chartData];
+
+
+
+
 
 
             }
