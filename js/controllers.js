@@ -183,11 +183,17 @@ myApp.directive('donutChart', function($window) {
 
                 var colors = [];
 
-                for(var a = 0; a < dataset.length; a++){
+                for (var a = 0; a < dataset.length; a++) {
                     colors.push(dataset[a].color);
                 }
 
-                console.log(colors);
+                var labels = [];
+
+                for (var b = 0; b < dataset.length; b++) {
+                    labels.push(dataset[b].label);
+                }
+
+
 
                 //reverse dataset on second graph just looks a little better...
                 function reverseDataset() {
@@ -247,13 +253,25 @@ myApp.directive('donutChart', function($window) {
                         return 'translate(' + horz + ',' + vert + ')';
                     });
 
-                    // var ii = 0;
+               
                 legend.append('rect')
                     .attr('width', legendRectSize)
                     .attr('height', legendRectSize)
-                    .style('fill', function (d,i){return colors[i]})
-                    .style('stroke', function (d,i){return colors[i]});
-                    // ii += 1;
+                    .style('fill', function(d, i) {
+                        return colors[i]
+                    })
+                    .style('stroke', function(d, i) {
+                        return colors[i]
+                    });
+               
+
+                legend.append('text')
+                    .data(labels)
+                    .attr('x', legendRectSize + legendSpacing)
+                    .attr('y', legendRectSize - legendSpacing)
+                    .text(function(d) {
+                        return d;
+                    });
 
 
             }
