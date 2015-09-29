@@ -128,7 +128,23 @@ myApp.directive('pieChart', function($window) {
 
                 var dataset = scope[attrs.chartData];
 
-                var width = 180;
+                var colors = [];
+
+                for (var a = 0; a < dataset.length; a++) {
+                    colors.push(dataset[a].color);
+                }
+
+                var labels = [];
+
+                for (var b = 0; b < dataset.length; b++) {
+                    labels.push(dataset[b].label);
+                }
+
+
+                var legendRectSize = 12;
+                var legendSpacing = 4;
+
+                var width = 360;
                 var height = 180;
                 var radius = Math.min(width, height) / 2;
 
@@ -137,7 +153,7 @@ myApp.directive('pieChart', function($window) {
                     .attr('width', width)
                     .attr('height', height)
                     .append('g')
-                    .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+                    .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')')
 
                 var arc = d3.svg.arc()
                     .outerRadius(radius);
@@ -155,6 +171,39 @@ myApp.directive('pieChart', function($window) {
                     .attr('d', arc)
                     .attr('fill', function(d) {
                         return d.data.color;
+                    })
+
+                var legend = svg.selectAll('.legend')
+                    .data(colors)
+                    .enter()
+                    .append('g')
+                    .attr('class', 'legend')
+                    .attr('transform', function(d, i) {
+                        var height = legendRectSize + legendSpacing;
+                        var offset = height * colors.length / 2;
+                        var horz = 8 * legendRectSize;
+                        var vert = i * height - offset;
+                        return 'translate(' + horz + ',' + vert + ')';
+                    });
+
+
+                legend.append('rect')
+                    .attr('width', legendRectSize)
+                    .attr('height', legendRectSize)
+                    .style('fill', function(d, i) {
+                        return colors[i]
+                    })
+                    .style('stroke', function(d, i) {
+                        return colors[i]
+                    });
+
+
+                legend.append('text')
+                    .data(labels)
+                    .attr('x', legendRectSize + legendSpacing)
+                    .attr('y', legendRectSize - legendSpacing)
+                    .text(function(d) {
+                        return d;
                     });
 
             }
@@ -209,7 +258,7 @@ myApp.directive('donutChart', function($window) {
 
                 var retData = reverseDataset();
 
-                var width = 180;
+                var width = 360;
                 var height = 180;
                 var radius = Math.min(width, height) / 2;
                 var centerWidth = 30;
@@ -253,7 +302,7 @@ myApp.directive('donutChart', function($window) {
                         return 'translate(' + horz + ',' + vert + ')';
                     });
 
-               
+
                 legend.append('rect')
                     .attr('width', legendRectSize)
                     .attr('height', legendRectSize)
@@ -263,7 +312,7 @@ myApp.directive('donutChart', function($window) {
                     .style('stroke', function(d, i) {
                         return colors[i]
                     });
-               
+
 
                 legend.append('text')
                     .data(labels)
