@@ -181,6 +181,14 @@ myApp.directive('donutChart', function($window) {
 
                 var dataset = scope[attrs.chartData];
 
+                var colors = [];
+
+                for(var a = 0; a < dataset.length; a++){
+                    colors.push(dataset[a].color);
+                }
+
+                console.log(colors);
+
                 //reverse dataset on second graph just looks a little better...
                 function reverseDataset() {
                     var retData = new Array;
@@ -190,6 +198,8 @@ myApp.directive('donutChart', function($window) {
                     return retData;
                 }
                 //
+                var legendRectSize = 12;
+                var legendSpacing = 4;
 
                 var retData = reverseDataset();
 
@@ -223,6 +233,27 @@ myApp.directive('donutChart', function($window) {
                     .attr('fill', function(d) {
                         return d.data.color;
                     });
+
+                var legend = svg.selectAll('.legend')
+                    .data(colors)
+                    .enter()
+                    .append('g')
+                    .attr('class', 'legend')
+                    .attr('transform', function(d, i) {
+                        var height = legendRectSize + legendSpacing;
+                        var offset = height * colors.length / 2;
+                        var horz = -2 * legendRectSize;
+                        var vert = i * height - offset;
+                        return 'translate(' + horz + ',' + vert + ')';
+                    });
+
+                    // var ii = 0;
+                legend.append('rect')
+                    .attr('width', legendRectSize)
+                    .attr('height', legendRectSize)
+                    .style('fill', function (d,i){return colors[i]})
+                    .style('stroke', function (d,i){return colors[i]});
+                    // ii += 1;
 
 
             }

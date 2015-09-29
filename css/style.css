@@ -2,3 +2,10 @@
 	display:inline;
 	float:left;
 }
+
+  .legend {
+    font-size: 12px;
+  }
+  rect {
+    stroke-width: 2;
+  }
