@@ -8,27 +8,27 @@ myApp.controller('MyController', function MyController($scope, $http) {
     $scope.stats = [{
         'label': 'str',
         'value': 12,
-        'color': 'red'
+        'color': '#c0392b'
     }, {
         'label': 'dex',
         'value': 10,
-        'color': 'orange'
+        'color': '#f39c12'
     }, {
         'label': 'con',
         'value': 8,
-        'color': 'purple'
+        'color': '#9b59b6'
     }, {
         'label': 'int',
         'value': 6,
-        'color': 'blue'
+        'color': '#2980b9'
     }, {
         'label': 'wis',
         'value': 4,
-        'color': 'green'
+        'color': '#2ecc71'
     }, {
         'label': 'cha',
         'value': 2,
-        'color': 'pink'
+        'color': '#95a5a6'
     }];
 
     $scope.makeCircle = function(stat) {
